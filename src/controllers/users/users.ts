@@ -1,7 +1,9 @@
-import { FastifyReply, FastifyRequest  } from "fastify";
+import {  FastifyReply, FastifyRequest,   } from "fastify";
 import { verifyPassword } from "../../utils/hash";
-import { CreateUserInput, LoginInput } from "../../schema/users/users";
-import { createUser, findUserByEmail, getAllUsers} from "../../services/users/users";
+import { CreateUserInput, LoginInput, UpdateUserInput } from "../../schema/users/users";
+import { createUser, findUserByEmail, getAllUsers, updateUser} from "../../services/users/users";
+
+
 
 export async function registerUserHandler(
     
@@ -62,31 +64,41 @@ export async function loginHandler(
 
     }
 
-    export async function getUsersHandler(){
-        const users = await getAllUsers()
+export async function getUsersHandler(){
+    const users = await getAllUsers()
 
-        return users;
+    return users;
+    
+}
+
+// export async function getUserHandler(){
+
+//     const {id} = request.
+//     const user = await getUser()
+
+//     return user;
+    
+// }
+
+export async function updateUserHandler(
+    request: FastifyRequest<{
+        Body: UpdateUserInput;
+        Params:{
+            id:string
+        }
+    }>, 
+    reply: FastifyReply
+    ) {
+        const {id} = request.params;
         
+        const name = request.body.name
+        const email = request.body.email
+
+        const user = await updateUser(id, name, email)
+
+        return reply.code(204).send(user)
+
+    
     }
 
-// export async function updateUserHandler(
-//     request: FastifyRequest<{
-//         Body: UpdateUserInput;
-//     }>, 
-//     reply: FastifyReply
-//     ) {
-
-//         const {id} = request.params;
-//         const body = request.body;
-
-//         try{
-//             const {name} = request.body
-
-//             return reply.code(201).send(user);
-//         }catch(e){
-//             console.log(e)
-//             return reply.code(500).send(e)
-//         }
-//     }
-     
     

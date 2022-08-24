@@ -35,14 +35,14 @@ const loginResponseSchema = z.object({
 })
 
 const updateUserSchema = z.object({
-    name: z.string({
-        required_error: 'Name is required for updates'
-    }),
+    email: z.string(),
+    name: z.string(),
 
 })
 
-const updateUserResponse = z.object({
+const updateUserResponseSchema = z.object({
     id: z.string(),
+    email: z.string(),
     name: z.string(),
 
 })
@@ -59,5 +59,5 @@ export const {schemas: userSchemas, $ref } = buildJsonSchemas({
     loginSchema,
     loginResponseSchema,
     updateUserSchema,
-    updateUserResponse,
+    updateUserResponseSchema,
 })
