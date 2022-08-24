@@ -47,10 +47,16 @@ const updateUserResponseSchema = z.object({
 
 })
 
+const deleteUserSchema = z.object({
+    id: z.string(),
+
+})
+
 //infer is a type not a fx hence use of <>
 export type CreateUserInput = z.infer<typeof createUserSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type UpdateUserInput = z.infer<typeof updateUserSchema>;
+export type DeleteUserInput = z.infer<(typeof deleteUserSchema)>;
 
 
 export const {schemas: userSchemas, $ref } = buildJsonSchemas({
@@ -60,4 +66,5 @@ export const {schemas: userSchemas, $ref } = buildJsonSchemas({
     loginResponseSchema,
     updateUserSchema,
     updateUserResponseSchema,
+    deleteUserSchema,
 })

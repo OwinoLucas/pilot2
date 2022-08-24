@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify"
 
-import { registerUserHandler, loginHandler, getUsersHandler, updateUserHandler} from "../../controllers/users/users" ;
+import { registerUserHandler, loginHandler, getUsersHandler, updateUserHandler, deleteUserHandler} from "../../controllers/users/users" ;
 import { $ref } from "../../schema/users/users";
 
 
@@ -42,12 +42,14 @@ async function userRoutes(server: FastifyInstance){
             body: $ref("updateUserSchema"),
             
             response: {
-                204: $ref("updateUserResponseSchema")
+                201: $ref("updateUserResponseSchema")
             }
         }
 
     } ,
     updateUserHandler);
+
+    server.delete('/delete/:id', deleteUserHandler)
     
 }
 

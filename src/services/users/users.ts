@@ -34,14 +34,6 @@ export async function getAllUsers() {
     
 }
 
-export async function getUser(id: string) {
-    return prisma.user.findUnique({
-        where: {
-            id,
-        }
-    })
-    
-}
 
 export async function updateUser(id: string, name: string, email: string) {
     
@@ -59,3 +51,14 @@ export async function updateUser(id: string, name: string, email: string) {
   
 }
 
+export async function deleteUser(id: string) {
+    
+    return prisma.user.delete({
+        where:{
+            id,     
+        },
+    })
+
+  
+  
+}
