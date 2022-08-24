@@ -1,10 +1,10 @@
 import { FastifyInstance } from "fastify"
-import { registerUserHandler, loginHandler, getUsersHandler } from "../../controllers/users/users" ;
+import { registerUserHandler, loginHandler, getUsersHandler} from "../../controllers/users/users" ;
 import { $ref } from "../../schema/users/users";
 
 
 
-async function userRoutes(server: FastifyInstance):Promise<void>{
+async function userRoutes(server: FastifyInstance){
 
     server.post('/',
     {
@@ -34,6 +34,8 @@ async function userRoutes(server: FastifyInstance):Promise<void>{
             preHandler: server.authenticate //doesnt exist in fastify instance need to declare globally
         },
         getUsersHandler);
+
+    // server.put('/update/user', updateUserHandler);
     
 }
 

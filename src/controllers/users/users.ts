@@ -1,10 +1,10 @@
 import { FastifyReply, FastifyRequest  } from "fastify";
-import { server } from "../../app";
 import { verifyPassword } from "../../utils/hash";
 import { CreateUserInput, LoginInput } from "../../schema/users/users";
 import { createUser, findUserByEmail, getAllUsers} from "../../services/users/users";
 
 export async function registerUserHandler(
+    
     request: FastifyRequest<{
         Body: CreateUserInput;
     }>, 
@@ -23,7 +23,7 @@ export async function registerUserHandler(
         }
     }
 
-export async function loginHandler(  
+export async function loginHandler(
     request: FastifyRequest<{
     Body: LoginInput;
     }>, 
@@ -51,13 +51,14 @@ export async function loginHandler(
             const {password, salt, ...rest} = user;
             
             //generate access token
-            return {accessToken: server.jwt.sign(rest)};
+            return {accessToken: request.server.jwt.sign(rest)};
         }
 
         //respond
         return reply.code(401).send({
             message: "Invali Email or Password"
         })
+        
 
     }
 
@@ -67,3 +68,25 @@ export async function loginHandler(
         return users;
         
     }
+
+// export async function updateUserHandler(
+//     request: FastifyRequest<{
+//         Body: UpdateUserInput;
+//     }>, 
+//     reply: FastifyReply
+//     ) {
+
+//         const {id} = request.params;
+//         const body = request.body;
+
+//         try{
+//             const {name} = request.body
+
+//             return reply.code(201).send(user);
+//         }catch(e){
+//             console.log(e)
+//             return reply.code(500).send(e)
+//         }
+//     }
+     
+    

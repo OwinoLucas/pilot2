@@ -34,9 +34,23 @@ const loginResponseSchema = z.object({
     accessToken: z.string(),
 })
 
+const updateUserSchema = z.object({
+    name: z.string({
+        required_error: 'Name is required for updates'
+    }),
+
+})
+
+const updateUserResponse = z.object({
+    id: z.string(),
+    name: z.string(),
+
+})
+
 //infer is a type not a fx hence use of <>
 export type CreateUserInput = z.infer<typeof createUserSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+export type UpdateUserInput = z.infer<typeof updateUserSchema>;
 
 
 export const {schemas: userSchemas, $ref } = buildJsonSchemas({
@@ -44,4 +58,6 @@ export const {schemas: userSchemas, $ref } = buildJsonSchemas({
     createUserResponseSchema,
     loginSchema,
     loginResponseSchema,
+    updateUserSchema,
+    updateUserResponse,
 })
