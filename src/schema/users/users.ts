@@ -1,5 +1,6 @@
-import { z } from "zod"; //Zod is a TypeScript-first schema declaration and validation library
+import {  z } from "zod"; //Zod is a TypeScript-first schema declaration and validation library
 import { buildJsonSchemas } from "fastify-zod"; // to modify the response user gets
+
 
 const userCore = {
     email: z.string({
@@ -40,6 +41,10 @@ const updateUserSchema = z.object({
 
 })
 
+const getUserSchema = z.object({
+    id: z.string(),
+})
+
 const updateUserResponseSchema = z.object({
     id: z.string(),
     email: z.string(),
@@ -57,6 +62,7 @@ export type CreateUserInput = z.infer<typeof createUserSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type UpdateUserInput = z.infer<typeof updateUserSchema>;
 export type DeleteUserInput = z.infer<(typeof deleteUserSchema)>;
+export type GetUserInput = z.infer<(typeof getUserSchema)>;
 
 
 export const {schemas: userSchemas, $ref } = buildJsonSchemas({
@@ -64,6 +70,7 @@ export const {schemas: userSchemas, $ref } = buildJsonSchemas({
     createUserResponseSchema,
     loginSchema,
     loginResponseSchema,
+    getUserSchema,
     updateUserSchema,
     updateUserResponseSchema,
     deleteUserSchema,

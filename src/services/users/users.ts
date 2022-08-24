@@ -3,6 +3,7 @@ import prisma from "../../utils/prisma"
 import { CreateUserInput,} from "../../schema/users/users";
 
 
+
 export async function createUser(input: CreateUserInput) {
     const { password, ...rest } = input;
 
@@ -34,6 +35,19 @@ export async function getAllUsers() {
     
 }
 
+export async function getUser(id: string) {
+    return prisma.user.findUnique({
+        select: {
+            id: true, 
+            name: true,
+            email: true
+        },
+        where: {
+            id,
+        }
+
+    })
+}
 
 export async function updateUser(id: string, name: string, email: string) {
     
