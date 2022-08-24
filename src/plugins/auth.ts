@@ -10,10 +10,9 @@ export default fp(async function(server: FastifyInstance, opts) {
   
   server.decorate("authenticate", async function(request: FastifyRequest, reply: FastifyReply,done:HookHandlerDoneFunction) {
     try {
-      if(await request.jwtVerify()){
+      await request.jwtVerify().then(rep=>{
         done();
-      }
-      return reply.code(401).send({message:"Invalid code"})
+      })
     } catch (err) {
       return reply.send(err)
     }

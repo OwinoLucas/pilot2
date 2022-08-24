@@ -3,7 +3,7 @@ import AutoLoad, {AutoloadPluginOptions} from '@fastify/autoload';
 import { FastifyPluginAsync } from 'fastify';
 import fastifyJwt from "@fastify/jwt";
 import { userSchemas } from './schema/users/users';
-import userRoutes from "./routes/users/users";
+//import userRoutes from "./routes/users/users";
 
 
 export type AppOptions = {
@@ -21,7 +21,7 @@ const app: FastifyPluginAsync<AppOptions> = async (
     for (const schema of userSchemas) {
     void fastify.addSchema(schema);
   }
-  void fastify.register(userRoutes, {prefix: 'api/users'})
+  //void fastify.register(userRoutes, {prefix: 'api/users'})
   // Do not touch the following lines
 
   // This loads all plugins defined in plugins
