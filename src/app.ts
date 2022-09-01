@@ -3,8 +3,14 @@ import AutoLoad, {AutoloadPluginOptions} from '@fastify/autoload';
 import { FastifyPluginAsync } from 'fastify';
 import fastifyJwt from "@fastify/jwt";
 import { userSchemas } from './schema/users/users';
-//import userRoutes from "./routes/users/users";
+// import { ApolloServer } from 'apollo-server'
+// import schema from './graphql/schema/schema';
 
+
+// const server = new ApolloServer({ schema});
+// server.listen().then(({ url }) => {
+//   console.log(`server ready aaaaat ${url}graphql`)
+// }).catch(err => console.log(`error launching server`, err));
 
 export type AppOptions = {
   // Place your custom options for app below here.
@@ -21,7 +27,8 @@ const app: FastifyPluginAsync<AppOptions> = async (
     for (const schema of userSchemas) {
     void fastify.addSchema(schema);
   }
-  //void fastify.register(userRoutes, {prefix: 'api/users'})
+
+
   // Do not touch the following lines
 
   // This loads all plugins defined in plugins
@@ -40,6 +47,9 @@ const app: FastifyPluginAsync<AppOptions> = async (
   })
 
 };
+
+
+
 
 export default app;
 export { app }

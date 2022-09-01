@@ -1,0 +1,10 @@
+type Mutation {
+    signup(email: String!, name: String!, password: String!): AuthPayload
+    login(email: String!, password: String!): AuthPayload
+    updateUser(id: String, email: String, name: String): User
+    deleteUser(id: String): User
+    addproduct(title: String, content: String, price: Float): Product
+    updateproduct(id: String, title: String, content: String, price: Float): Product
+    deleteproduct(id: String): Product
+
+}

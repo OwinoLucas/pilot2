@@ -1,0 +1,28 @@
+scalar Date
+
+type AuthPayload {
+    token: String
+    user: User
+}
+
+type User {
+    id: String
+    name: String
+    email: String
+    password: String
+    products: [Product] 
+
+}
+
+type Product {
+    id: String
+    title: String
+    content: String
+    price: Float
+    ownerId: String
+    updatedAt: Date
+    createdAt: Date
+
+}
+
+

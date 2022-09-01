@@ -1,0 +1,7 @@
+type Query {
+    me(id: String): User
+    allUsers:[User]
+    authme(id: String): User!
+    product(id: String): Product
+    allProducts:[Product]
+}
